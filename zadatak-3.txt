@@ -1,0 +1,2 @@
+komponenta App treba biti def funkcijom
+za cuvanje stanja potrebano koristiti useState hook

@@ -1,50 +1,45 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { UserClass, UserFunction, UserChildren } from '../components'
 
-const users = [
-  {name: 'Marko', years:'35'},
-  {name: 'Ivan', years:'30'},
-  {name: 'Ana', years:'25'},
-] 
+// const users = [
+//   {name: 'Marko', years:'35'},
+//   {name: 'Ivan', years:'30'},
+//   {name: 'Ana', years:'25'},
+// ] 
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       users: [
-        {name: 'Marko', years:35},
-        {name: 'Ivan', years:30},
-        {name: 'Ana', years:25},
-       ],
-       tekst: "Proizvoljan tekst"
+export function App() {
+    const inicUseri = [
+            { name: 'Irena', years: 38 },
+            { name: 'Petar', years: 40 },
+            { name: 'Iskra', years: 6 },
+            { name: 'Walter', years: 3 },
+          ];
+    
+    const tekst = "Stisni da ostarimo"
+    
+    const [users, setUsers] = useState(inicUseri);
+
+    const uvecajGodine = () => {
+        setUsers(prevState => {
+          const newUsers = prevState.map (user => {
+            return {...user, years: user.years + 1 }
+        })
+        return newUsers
+        })
     }
-  }
-
-  uvecajGodine = () => {
-    const newUsers = this.state.users.map (user => {
-      return {...user, years: user.years + 1 }
-    })
-    this.setState({users: newUsers})
-  }
-
-  render(){
-    const {users, tekst} = this.state
-    return (
+  return (
         <>
-          <h1>State</h1>
+          <h1>Život</h1>
           < UserClass name={users[0].name} years={users[0].years}/>
           < UserFunction name={users[1].name} years={users[1].years}/>
-          < UserChildren name={users[2].name} years={users[2].years}>
-            a hobi mi je programiranje...
+          < UserChildren name={users[2].name} years={users[2].years}/>
+          < UserChildren name={users[3].name} years={users[3].years}>
+          kako ćemo stariti :)
           <p>{tekst}</p>
           </UserChildren>
-          <button onClick={this.uvecajGodine}> Uvećaj godine</button>
+          <button onClick={uvecajGodine}> Uvećaj za godinu</button>
         </>
     )
   }
-  
-}
-
 export default App
